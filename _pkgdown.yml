@@ -1,0 +1,22 @@
+template:
+  bootstrap: 5
+  bootswatch: flatly
+  bslib:
+    primary: "#005F73"
+    navbar-background: "#0a9396"
+
+home:
+  title: MortalMove
+  description: >
+    Estimate mortality risk of animals from GPS movement data using spatially explicit time-to-event models.
+
+navbar:
+  structure:
+    left: [home, reference, articles]
+    right: [github]
+  components:
+    github:
+      icon: fa-github
+      href: https://github.com/jiangyue-wang/MortalMove
+
+url: https://jiangyue-wang.github.io/MortalMove

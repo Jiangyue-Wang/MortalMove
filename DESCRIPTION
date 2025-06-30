@@ -10,8 +10,21 @@ Authors@R: c(
     )
   )
 Description: Provides functions to estimate mortality risk of animals using movement tracking data and Bayesian inference via Stan.
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/Jiangyue-Wang/MortalMove
+URL: https://github.com/Jiangyue-Wang/MortalMove, http://www.jiangyue-wang.com/MortalMove/
 BugReports: https://github.com/Jiangyue-Wang/MortalMove/issues
+Imports: 
+    cmdstanr,
+    FNN
+RoxygenNote: 7.3.2
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 3.5)

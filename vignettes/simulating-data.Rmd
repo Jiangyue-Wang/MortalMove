@@ -1,0 +1,70 @@
+---
+title: "Simulating Animal Movement and Mortality Data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Simulating Movement}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(MortalMove)
+library(ggplot2)
+```
+
+# Simulate a dataset
+
+```{r}
+sim <- simulate_data(n_animals = 100, n_fixes = 200, n_dead = 20, n_knots = 25)
+str(sim, max.level = 1)
+```
+
+# Plot out simulated dataset - individual monitoring length and fate
+```{r}
+df <- data.frame(id = 1:sim$n, n_locs  = sim$n_locs, delta = sim$delta)
+
+ggplot(df, aes(x = id, y = n_locs)) +
+  geom_point(aes(color = delta)) +
+  geom_segment(aes(xend = id, yend = 0, color = delta)) +
+  labs(x = "Animal ID", y = "Time steps") +
+  theme_minimal() +
+  ggtitle("Monitoring length and fate of each animal") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  coord_flip()
+```
+
+
+# Plot out simulated dataset - individual movement paths
+```{r}
+df <- sim$raw_data
+df <- df[df$animal_id %in% c(1,13),]
+ggplot(df, aes(x = x, y = y, color = delta)) +
+  geom_path() +
+  geom_point() +
+  labs(x = "X Coordinate", y = "Y Coordinate") +
+  theme_minimal() +
+  ggtitle("Movement paths of animals")
+```
+
+# Plot some covariates by fate
+```{r}
+df <- sim$raw_data
+df$delta <- as.factor(df$delta)
+ggplot(df, aes(x = delta, y = hunter)) +
+  geom_boxplot() +
+  labs(x = "Fate", y = "Hunter density") +
+  theme_minimal() +
+  ggtitle("Hunter covariate by fate of animal") +
+  scale_y_continuous(limits = c(0, 0.1))
+
+ggplot(df, aes(x = delta, y = prey_avail)) +
+  geom_boxplot() +
+  labs(x = "Fate", y = "Prey availability") +
+  theme_minimal() +
+  ggtitle("Prey covariate by fate of animal")
+```
+

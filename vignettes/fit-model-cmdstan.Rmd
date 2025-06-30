@@ -1,0 +1,88 @@
+---
+title: "Fitting a model using cmdstanr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{fit-model-cmdstan}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MortalMove)
+library(cmdstanr)
+set_cmdstan_path("C:/Users/jyuewang/.cmdstan/cmdstan-2.36.0/cmdstan-2.36.0")
+```
+
+# Simulating data
+
+```{r}
+sim <- simulate_data(n_animals = 100, n_fixes = 200, n_dead = 20, n_knots = 25)
+sim[["raw_data"]] <- NULL
+sim[["ind_cell_effect"]] <- 0
+```
+
+
+# Fit stan model using cmdstan
+
+```{r, eval=FALSE}
+
+model_file <- paste("D:/OneDrive - UW/Research/MortalMove/inst/stan", "mortality_model.stan", sep = "/")
+mod <- cmdstan_model(model_file, exe_file = "D:/OneDrive - UW/Research/MortalMove/inst/stan/mortality_model.exe")
+fit <- mod$sample(
+  data = sim,
+  chains = 2,
+  parallel_chains = 2,
+  iter_warmup = 500,
+  iter_sampling = 1500,
+  seed = 123
+)
+
+```
+
+```{r, echo=FALSE}
+data(fit)
+```
+
+# Check diagnostics
+```{r}
+diagnostic_fit(fit, plot = TRUE, observed_y = sim$delta)
+
+```
+
+# Fit with spatial autocorrelation
+
+```{r, eval = FALSE}
+# Fit with spatial autocorrelation
+sim[["ind_cell_effect"]] <- 1
+model_file <- paste("D:/OneDrive - UW/Research/MortalMove/inst/stan", "mortality_model.stan", sep = "/")
+mod <- cmdstan_model(model_file, exe_file = "D:/OneDrive - UW/Research/MortalMove/inst/stan/mortality_model.exe")
+
+# run fewer iterations due to time constraint
+fit_spat <- mod$sample(
+  data = sim,
+  chains = 2,
+  parallel_chains = 2,
+  iter_warmup = 50,
+  iter_sampling = 150,
+  seed = 123
+)
+```
+
+
+```{r, echo = FALSE}
+data(fit_spat)
+```
+
+```{r}
+diagnostic_fit(fit_spat, plot = TRUE, observed_y = sim$delta)
+```
+
+
+
