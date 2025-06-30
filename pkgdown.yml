@@ -1,0 +1,10 @@
+pandoc: 3.1.11
+pkgdown: 2.1.3
+pkgdown_sha: ~
+articles:
+  fit-model-cmdstan: fit-model-cmdstan.html
+  simulating-data: simulating-data.html
+last_built: 2025-06-30T23:00Z
+urls:
+  reference: http://www.jiangyue-wang.github.io/MortalMove/reference
+  article: http://www.jiangyue-wang.github.io/MortalMove/articles
