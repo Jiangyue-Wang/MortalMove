@@ -76,7 +76,7 @@ fit_spat <- mod$sample(
 ```
 
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = TRUE}
 data(fit_spat)
 ```
 

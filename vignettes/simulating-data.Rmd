@@ -59,7 +59,7 @@ ggplot(df, aes(x = delta, y = hunter)) +
   labs(x = "Fate", y = "Hunter density") +
   theme_minimal() +
   ggtitle("Hunter covariate by fate of animal") +
-  scale_y_continuous(limits = c(0, 0.1))
+  scale_y_continuous(limits = c(0, 10))
 
 ggplot(df, aes(x = delta, y = prey_avail)) +
   geom_boxplot() +
