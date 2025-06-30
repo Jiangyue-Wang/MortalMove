@@ -13,7 +13,7 @@ Description: Provides functions to estimate mortality risk of animals using move
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/Jiangyue-Wang/MortalMove, https://jiangyuewang.github.io/MortalMove
+url: https://jiangyuewang.github.io/MortalMove/
 BugReports: https://github.com/Jiangyue-Wang/MortalMove/issues
 Remotes:
     stan-dev/cmdstanr
@@ -31,3 +31,4 @@ Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
 Depends: 
     R (>= 3.5)
+URL: https://github.com/Jiangyue-Wang/MortalMove
