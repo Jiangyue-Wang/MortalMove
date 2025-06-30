@@ -4,8 +4,8 @@ Title: Estimate Cougar Mortality Risk from Movement Data
 Version: 0.1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Jiangyue", "Wang",
+      email = "jyuewang@uw.edu",
       role = c("aut", "cre")
     )
   )
@@ -13,8 +13,10 @@ Description: Provides functions to estimate mortality risk of animals using move
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/Jiangyue-Wang/MortalMove, http://www.jiangyue-wang.com/MortalMove/
+URL: https://github.com/Jiangyue-Wang/MortalMove, https://jiangyuewang.github.io/MortalMove
 BugReports: https://github.com/Jiangyue-Wang/MortalMove/issues
+Remotes:
+    stan-dev/cmdstanr
 Imports: 
     cmdstanr,
     FNN
