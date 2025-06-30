@@ -20,6 +20,7 @@ Remotes:
 Imports: 
     cmdstanr,
     FNN
+    usethis::use_package("bayesplot")
 RoxygenNote: 7.3.2
 Suggests: 
     knitr,

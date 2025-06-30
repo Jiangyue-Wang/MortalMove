@@ -2,7 +2,7 @@
 title: "Fitting a model using cmdstanr"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{fit-model-cmdstan}
+  %\VignetteIndexEntry{Fitting a model using cmdstanr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
