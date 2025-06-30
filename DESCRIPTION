@@ -20,7 +20,13 @@ Remotes:
 Imports: 
     bayesplot,
     cmdstanr,
-    FNN
+    dplyr,
+    FNN,
+    ggplot2,
+    loo,
+    lubridate,
+    posterior,
+    tidyr
 RoxygenNote: 7.3.2
 Suggests: 
     knitr,
