@@ -40,8 +40,7 @@ fit <- mod$sample(
   parallel_chains = 2,
   iter_warmup = 500,
   iter_sampling = 1500,
-  seed = 123,
-  variables = c("llambda", "alpha", "beta", "log_lik")
+  seed = 123
 )
 fit$summary()
 

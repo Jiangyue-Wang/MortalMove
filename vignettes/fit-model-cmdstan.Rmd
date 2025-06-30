@@ -53,7 +53,7 @@ data(fit)
 # Check diagnostics
 ```{r}
 diagnostic_fit(fit, plot = TRUE, observed_y = sim$delta)
-
+bayesplot::mcmc_trace(fit$draws(c("llambda","alpha","beta")))
 ```
 
 # Fit with spatial autocorrelation
@@ -82,6 +82,7 @@ data(fit_spat)
 
 ```{r}
 diagnostic_fit(fit_spat, plot = TRUE, observed_y = sim$delta)
+bayesplot::mcmc_trace(fit_spat$draws(c("llambda","alpha","beta")))
 ```
 
 

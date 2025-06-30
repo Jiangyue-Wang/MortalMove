@@ -18,9 +18,9 @@ BugReports: https://github.com/Jiangyue-Wang/MortalMove/issues
 Remotes:
     stan-dev/cmdstanr
 Imports: 
+    bayesplot,
     cmdstanr,
     FNN
-    usethis::use_package("bayesplot")
 RoxygenNote: 7.3.2
 Suggests: 
     knitr,
