@@ -19,7 +19,7 @@ Imports:
     loo,
     lubridate,
     posterior,
-    rstan (== 2.32.6),
+    rstan,
     tidyr
 Suggests: 
     ggplot2,
