@@ -34,6 +34,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/fit-model-cmdstan.html">Fitting a model using cmdstanr</a></li>
+    <li><a class="dropdown-item" href="../articles/prepare-data-for-stan.html">Get movement tracking datasets ready for modeling, fit the model using cmdstanr or rstan</a></li>
     <li><a class="dropdown-item" href="../articles/simulating-data.html">Simulating Animal Movement and Mortality Data</a></li>
   </ul>
 </li>
@@ -72,9 +73,8 @@
 <span><span class="co">#&gt; - CmdStanR documentation and vignettes: mc-stan.org/cmdstanr</span></span>
 <span><span class="co">#&gt; - Use set_cmdstan_path() to set the path to CmdStan</span></span>
 <span><span class="co">#&gt; - Use install_cmdstan() to install CmdStan</span></span>
-<span><span class="fu"><a href="https://mc-stan.org/cmdstanr/reference/set_cmdstan_path.html" class="external-link">set_cmdstan_path</a></span><span class="op">(</span><span class="st">"C:/Users/jyuewang/.cmdstan/cmdstan-2.36.0/cmdstan-2.36.0"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Path not set. Can't find directory:</span></span>
-<span><span class="co">#&gt; C:/Users/jyuewang/.cmdstan/cmdstan-2.36.0/cmdstan-2.36.0</span></span></code></pre></div>
+<span><span class="fu"><a href="https://mc-stan.org/cmdstanr/reference/set_cmdstan_path.html" class="external-link">set_cmdstan_path</a></span><span class="op">(</span><span class="st">"YOUR_CMDSTAN_PATH"</span><span class="op">)</span> <span class="co"># Set your cmdstan path here</span></span>
+<span><span class="co">#&gt; Warning: Path not set. Can't find directory: YOUR_CMDSTAN_PATH</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="simulating-data">Simulating data<a class="anchor" aria-label="anchor" href="#simulating-data"></a>
 </h2>
@@ -87,9 +87,8 @@
 <h2 id="fit-stan-model-using-cmdstan">Fit stan model using cmdstan<a class="anchor" aria-label="anchor" href="#fit-stan-model-using-cmdstan"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">model_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"D:/OneDrive - UW/Research/MortalMove/inst/stan"</span>, <span class="st">"mortality_model.stan"</span>, sep <span class="op">=</span> <span class="st">"/"</span><span class="op">)</span></span>
-<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstan_model</a></span><span class="op">(</span><span class="va">model_file</span>, exe_file <span class="op">=</span> <span class="st">"D:/OneDrive - UW/Research/MortalMove/inst/stan/mortality_model.exe"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">model_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"stan/mortality_model.stan"</span>, package <span class="op">=</span> <span class="st">"MortalMove"</span><span class="op">)</span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstan_model</a></span><span class="op">(</span><span class="va">model_file</span>, exe_file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"stan/mortality_model.exe"</span>, package <span class="op">=</span> <span class="st">"MortalMove"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="va">mod</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">sim</span>,</span>
 <span>  chains <span class="op">=</span> <span class="fl">2</span>,</span>
@@ -175,8 +174,8 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit with spatial autocorrelation</span></span>
 <span><span class="va">sim</span><span class="op">[[</span><span class="st">"ind_cell_effect"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="va">model_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"D:/OneDrive - UW/Research/MortalMove/inst/stan"</span>, <span class="st">"mortality_model.stan"</span>, sep <span class="op">=</span> <span class="st">"/"</span><span class="op">)</span></span>
-<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstan_model</a></span><span class="op">(</span><span class="va">model_file</span>, exe_file <span class="op">=</span> <span class="st">"D:/OneDrive - UW/Research/MortalMove/inst/stan/mortality_model.exe"</span><span class="op">)</span></span>
+<span><span class="va">model_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"stan/mortality_model.stan"</span>, package <span class="op">=</span> <span class="st">"MortalMove"</span><span class="op">)</span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstan_model</a></span><span class="op">(</span><span class="va">model_file</span>, exe_file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"stan/mortality_model.exe"</span>, package <span class="op">=</span> <span class="st">"MortalMove"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># run fewer iterations due to time constraint</span></span>
 <span><span class="va">fit_spat</span> <span class="op">&lt;-</span> <span class="va">mod</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span></span>
