@@ -1,6 +1,6 @@
 Type: Package
 Package: MortalMove
-Title: Estimate Cougar Mortality Risk from Movement Data
+Title: Estimate Animal Mortality Risk from Movement Data
 Version: 0.1.0
 Authors@R: 
     person("Jiangyue", "Wang", , "jyuewang@uw.edu", role = c("aut", "cre"))
