@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(MortalMove)
 library(cmdstanr)
-set_cmdstan_path("C:/Users/jyuewang/.cmdstan/cmdstan-2.36.0/cmdstan-2.36.0")
+set_cmdstan_path("YOUR_CMDSTAN_PATH") # Set your cmdstan path here
 ```
 
 # Simulating data
@@ -32,9 +32,8 @@ sim[["ind_cell_effect"]] <- 0
 # Fit stan model using cmdstan
 
 ```{r, eval=FALSE}
-
-model_file <- paste("D:/OneDrive - UW/Research/MortalMove/inst/stan", "mortality_model.stan", sep = "/")
-mod <- cmdstan_model(model_file, exe_file = "D:/OneDrive - UW/Research/MortalMove/inst/stan/mortality_model.exe")
+model_file <- system.file("stan/mortality_model.stan", package = "MortalMove")
+mod <- cmdstan_model(model_file, exe_file = system.file("stan/mortality_model.exe", package = "MortalMove"))
 fit <- mod$sample(
   data = sim,
   chains = 2,
@@ -61,8 +60,8 @@ bayesplot::mcmc_trace(fit$draws(c("llambda","alpha","beta")))
 ```{r, eval = FALSE}
 # Fit with spatial autocorrelation
 sim[["ind_cell_effect"]] <- 1
-model_file <- paste("D:/OneDrive - UW/Research/MortalMove/inst/stan", "mortality_model.stan", sep = "/")
-mod <- cmdstan_model(model_file, exe_file = "D:/OneDrive - UW/Research/MortalMove/inst/stan/mortality_model.exe")
+model_file <- system.file("stan/mortality_model.stan", package = "MortalMove")
+mod <- cmdstan_model(model_file, exe_file = system.file("stan/mortality_model.exe", package = "MortalMove"))
 
 # run fewer iterations due to time constraint
 fit_spat <- mod$sample(

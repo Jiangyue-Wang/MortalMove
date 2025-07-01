@@ -1,4 +1,4 @@
-#' Prepare Stan Data from Real Cougar Tracking Dataset
+#' Prepare Stan Data from Real Tracking Dataset
 #'
 #' @param df A data.frame containing GPS points with columns: x, y, animal_id, and any user-specified covariates
 #' @param include_hab_cov Logical; whether to include habitat covariates

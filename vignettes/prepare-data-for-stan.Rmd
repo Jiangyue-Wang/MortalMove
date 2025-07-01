@@ -1,0 +1,120 @@
+---
+title: "Get movement tracking datasets ready for modeling, fit the model using cmdstanr or rstan"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Get movement tracking datasets ready for modeling, fit the model using cmdstanr or rstan}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MortalMove)
+library(dplyr)
+```
+
+# Required data structure
+```{r, echo = FALSE}
+data(sim)
+df <- sim$raw_data %>% dplyr::select(-delta, -fix_id, -cell_id)
+indv <- sim$z
+indv <- as.data.frame(indv) %>% mutate(animal_id = 1:nrow(indv))
+indv$fate <- sim$delta
+```
+
+You probably have two data frames: one with the GPS fixes with timestamps and one with the individual information (e.g., age, sex, fate, etc.). The first one should have the following columns:
+
+- `animal_id`: unique identifier for each individual
+- `timestamp`: date-time of the GPS fix (converted to `lubridate::ymd_hms()` format, or numeric format in seconds)
+- `x`: x-coordinate (in meters)
+- `y`: y-coordinate (in meters)
+- Other habitat covariates you want to include. Please note that if you want to use categorical variables (e.g., 4 season), you should input the variables as independent columns (e.g., `season_spring`, `season_summer`, `season_autumn`, with winter as reference level), where each column is a binary variable indicating the presence of that season. All values should be numeric.
+
+Here, I included prey availability (`prey_avail`) and hunter density (`hunter`) as habitat covariates.
+
+```{r}
+head(df)
+```
+
+
+The second one should have the following columns:
+- `animal_id`: unique identifier for each individual
+- `fate`: fate of the individual (e.g., 0 for alive, 1 for dead)
+- Other habitat covariates you want to include. Please note that if you want to use categorical variables (e.g., sex), you should input the variables as independent columns (e.g., `sex_male', with 1 for male, 0 for female). All values should be numeric.
+
+Here, I included age and sex as individual covariates.
+
+```{r}
+head(indv)
+```
+# Prepare data for modeling
+First, we need to integrate these two tables into one data frame, which will be used for modeling. The `dplyr::left_join()` function does this for you. Further, we need to change column name `fate` to `delta`.
+
+```{r}
+df <- left_join(df, indv, by = "animal_id")
+df <- df %>% 
+  dplyr::rename(delta = fate)
+head(df)
+```
+
+Next, we prepare the data for modeling. The `prepare_data_for_stan()` function does this for you. You can specify which habitat covariates and individual covariates you want to include in the model, as well as whether you want to include a cell effect (i.e., a random effect for each grid cell). You can also specify the grid bounds and resolution if you want to include a cell effect. The grid bounds should be specified as a list with `xmin`, `xmax`, `ymin`, and `ymax` values, and the grid resolution should be specified in meters. Please note that the grid bounds should cover the entire area where your data is collected, and the difference between `xmax` and `xmin`, `ymax` and `ymin` should be divisible by the grid resolution.
+
+```{r}
+df_stan_data <- prepare_stan_data(
+  df = df,
+  include_hab_cov = TRUE, include_ind_cov = TRUE,
+  hab_cov_names = c("hunter", "prey_avail"),
+  ind_cov_names = c("age", "sex_m"),
+  include_cell_effect = TRUE,
+  grid_bounds = list(xmin = 0, xmax = 1000, ymin = 0, ymax = 1000),
+  grid_res = 100
+)
+names(df_stan_data)
+```
+# Fit model using cmdstanr
+
+It is generally faster to fit the model using `cmdstanr` than `rstan`, but requires a bit compilation before running. You can install `cmdstanr` from [GitHub](https://github.com/stan-dev/cmdstanr), and then set the path to the CmdStan installation directory using `set_cmdstan_path()`. You can specify the number of chains, iterations, and other parameters as needed.
+
+```{r, eval = FALSE}
+library(cmdstanr)
+set_cmdstan_path("YOUR_CMD_PATH")
+model_file <- system.file("stan/mortality_model.stan", package = "MortalMove")
+mod <- cmdstan_model(model_file, exe_file = system.file("stan/mortality_model.exe", package = "MortalMove"))
+fit <- mod$sample(
+  data = df_stan_data,
+  chains = 2,
+  parallel_chains = 2,
+  iter_warmup = 50,
+  iter_sampling = 150,
+  seed = 123
+)
+```
+
+# Fit model using rstan
+
+If you prefer to use `rstan`, you can do so as well. It's much simpler to [install](https://mc-stan.org/install/), but may take longer to fit than `cmdstanr`, especially for complicated models with spatial effects.
+
+```{r, eval=F}
+library(rstan)
+model_file <- system.file("stan/mortality_model.stan", package = "MortalMove")
+fit <- stan(
+  file = model_file,
+  data = df_stan_data,
+  chains = 2,
+  iter = 200,
+  warmup = 50,
+  seed = 123
+)
+```
+
+
+
+
+
+

@@ -2,7 +2,7 @@
 % Please edit documentation in R/prepare_stan_data.R
 \name{prepare_stan_data}
 \alias{prepare_stan_data}
-\title{Prepare Stan Data from Real Cougar Tracking Dataset}
+\title{Prepare Stan Data from Real Tracking Dataset}
 \usage{
 prepare_stan_data(
   df,
@@ -36,5 +36,5 @@ prepare_stan_data(
 A named list ready to be passed to a CmdStan model
 }
 \description{
-Prepare Stan Data from Real Cougar Tracking Dataset
+Prepare Stan Data from Real Tracking Dataset
 }

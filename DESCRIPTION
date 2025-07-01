@@ -1,41 +1,38 @@
-Package: MortalMove
 Type: Package
+Package: MortalMove
 Title: Estimate Cougar Mortality Risk from Movement Data
 Version: 0.1.0
-Authors@R: c(
-    person(
-      "Jiangyue", "Wang",
-      email = "jyuewang@uw.edu",
-      role = c("aut", "cre")
-    )
-  )
-Description: Provides functions to estimate mortality risk of animals using movement tracking data and Bayesian inference via Stan.
+Authors@R: 
+    person("Jiangyue", "Wang", , "jyuewang@uw.edu", role = c("aut", "cre"))
+Description: Provides functions to estimate mortality risk of animals
+    using movement tracking data and Bayesian inference via Stan.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-url: https://jiangyuewang.github.io/MortalMove/
+URL: https://github.com/Jiangyue-Wang/MortalMove
 BugReports: https://github.com/Jiangyue-Wang/MortalMove/issues
-Remotes:
-    stan-dev/cmdstanr
+Depends: 
+    R (>= 3.5)
 Imports: 
     bayesplot,
     cmdstanr,
     dplyr,
     FNN,
-    ggplot2,
     loo,
     lubridate,
     posterior,
+    rstan (== 2.32.6),
     tidyr
-RoxygenNote: 7.3.2
 Suggests: 
+    ggplot2,
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0),
-    cmdstanr
-VignetteBuilder: knitr
-Roxygen: list(markdown = TRUE)
+    testthat (>= 3.0.0)
+VignetteBuilder: 
+    knitr
+Remotes:
+    stan-dev/cmdstanr
 Config/testthat/edition: 3
-Depends: 
-    R (>= 3.5)
-URL: https://github.com/Jiangyue-Wang/MortalMove
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+url: https://jiangyuewang.github.io/MortalMove/
