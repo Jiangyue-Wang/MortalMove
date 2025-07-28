@@ -102,7 +102,7 @@
 <h2 id="check-diagnostics">Check diagnostics<a class="anchor" aria-label="anchor" href="#check-diagnostics"></a>
 </h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/diagnostic_fit.html">diagnostic_fit</a></span><span class="op">(</span><span class="va">fit</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, observed_y <span class="op">=</span> <span class="va">sim</span><span class="op">$</span><span class="va">delta</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/diagnostic_fit.html">diagnostic_fit</a></span><span class="op">(</span><span class="va">fit</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, observed_y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">sim</span><span class="op">$</span><span class="va">time_step</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, delta <span class="op">=</span> <span class="va">sim</span><span class="op">$</span><span class="va">delta</span><span class="op">)</span></span>
 <span><span class="co">#&gt; This is posterior version 1.6.1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'posterior'</span></span>
@@ -141,11 +141,11 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 4</span></span></span>
 <span><span class="co">#&gt;   variable  rhat ess_bulk ess_tail</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> beta[1]   1.00    <span style="text-decoration: underline;">2</span>065.    <span style="text-decoration: underline;">1</span>799.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> beta[2]   1.00    <span style="text-decoration: underline;">1</span>725.    <span style="text-decoration: underline;">1</span>577.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> alpha[1]  1.00    <span style="text-decoration: underline;">2</span>202.    <span style="text-decoration: underline;">1</span>880.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> alpha[2]  1.00    <span style="text-decoration: underline;">2</span>153.    <span style="text-decoration: underline;">1</span>706.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> llambda   1.00    <span style="text-decoration: underline;">2</span>160.    <span style="text-decoration: underline;">1</span>913.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> beta[1]  1.00     <span style="text-decoration: underline;">2</span>065.    <span style="text-decoration: underline;">1</span>799.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> beta[2]  1.00     <span style="text-decoration: underline;">1</span>725.    <span style="text-decoration: underline;">1</span>577.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> alpha[1] 1.000    <span style="text-decoration: underline;">2</span>202.    <span style="text-decoration: underline;">1</span>880.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> alpha[2] 1.00     <span style="text-decoration: underline;">2</span>153.    <span style="text-decoration: underline;">1</span>706.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> llambda  1.00     <span style="text-decoration: underline;">2</span>160.    <span style="text-decoration: underline;">1</span>913.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Computed from 3000 by 100 log-likelihood matrix.</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -161,17 +161,16 @@
 <span><span class="co">#&gt; See help('pareto-k-diagnostic') for details.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Posterior predictive p-value summary:</span></span>
-<span><span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
-<span><span class="co">#&gt;  0.2100  0.2700  0.2900  0.2924  0.3100  0.4400</span></span></code></pre></div>
+<span><span class="co">#&gt;   variable p_value</span></span>
+<span><span class="co">#&gt; 1   Failed  0.3000</span></span>
+<span><span class="co">#&gt; 2 Censored  0.7625</span></span>
+<span><span class="fu">bayesplot</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html" class="external-link">mcmc_trace</a></span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llambda"</span>,<span class="st">"alpha"</span>,<span class="st">"beta"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fit-model-cmdstan_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">bayesplot</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html" class="external-link">mcmc_trace</a></span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llambda"</span>,<span class="st">"alpha"</span>,<span class="st">"beta"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fit-model-cmdstan_files/figure-html/unnamed-chunk-5-2.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="fit-with-spatial-autocorrelation">Fit with spatial autocorrelation<a class="anchor" aria-label="anchor" href="#fit-with-spatial-autocorrelation"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit with spatial autocorrelation</span></span>
 <span><span class="va">sim</span><span class="op">[[</span><span class="st">"ind_cell_effect"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="va">model_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"stan/mortality_model.stan"</span>, package <span class="op">=</span> <span class="st">"MortalMove"</span><span class="op">)</span></span>
@@ -186,8 +185,8 @@
 <span>  iter_sampling <span class="op">=</span> <span class="fl">150</span>,</span>
 <span>  seed <span class="op">=</span> <span class="fl">123</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/diagnostic_fit.html">diagnostic_fit</a></span><span class="op">(</span><span class="va">fit_spat</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, observed_y <span class="op">=</span> <span class="va">sim</span><span class="op">$</span><span class="va">delta</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/diagnostic_fit.html">diagnostic_fit</a></span><span class="op">(</span><span class="va">fit_spat</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, observed_y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">sim</span><span class="op">$</span><span class="va">time_step</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, delta <span class="op">=</span> <span class="va">sim</span><span class="op">$</span><span class="va">delta</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 5</span></span></span>
 <span><span class="co">#&gt;   variable    mean      sd      q5     q95</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -221,12 +220,11 @@
 <span><span class="co">#&gt; See help('pareto-k-diagnostic') for details.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Posterior predictive p-value summary:</span></span>
-<span><span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
-<span><span class="co">#&gt;  0.2100  0.2600  0.2800  0.2836  0.3000  0.4100</span></span></code></pre></div>
+<span><span class="co">#&gt;   variable p_value</span></span>
+<span><span class="co">#&gt; 1   Failed  0.3000</span></span>
+<span><span class="co">#&gt; 2 Censored  0.7625</span></span>
+<span><span class="fu">bayesplot</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html" class="external-link">mcmc_trace</a></span><span class="op">(</span><span class="va">fit_spat</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llambda"</span>,<span class="st">"alpha"</span>,<span class="st">"beta"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fit-model-cmdstan_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">bayesplot</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html" class="external-link">mcmc_trace</a></span><span class="op">(</span><span class="va">fit_spat</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llambda"</span>,<span class="st">"alpha"</span>,<span class="st">"beta"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="fit-model-cmdstan_files/figure-html/unnamed-chunk-8-2.png" width="700"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
