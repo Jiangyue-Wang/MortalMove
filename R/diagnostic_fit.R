@@ -10,6 +10,7 @@ diagnostic_fit <- function(fit, plot = TRUE, observed_y = NULL, delta = NULL) {
   library(posterior)
   library(bayesplot)
   library(loo)
+  library(ggplot2)
 
   if(!inherits(fit, "CmdStanMCMC")) {
     stop("fit must be a CmdStanMCMC object from cmdstanr::sample()")
