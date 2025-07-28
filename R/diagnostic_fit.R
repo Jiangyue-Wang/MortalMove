@@ -2,10 +2,11 @@
 #'
 #' @param fit A CmdStanMCMC object returned from cmdstanr::sample()
 #' @param plot Logical; whether to show diagnostic plots
-#' @param observed_y Optional vector of observed values if predictive p-value is to be computed
+#' @param observed_y Optional vector of observed values if predictive p-value is to be computed, the survey/survival length of each individual
+#' @param delta Optional vector of censoring indicators (0 = censored, 1 = dead/failed) if predictive p-value is to be computed
 #' @return Invisible list of diagnostics
 #' @export
-diagnostic_fit <- function(fit, plot = TRUE, observed_y = NULL) {
+diagnostic_fit <- function(fit, plot = TRUE, observed_y = NULL, delta = NULL) {
   library(posterior)
   library(bayesplot)
   library(loo)
@@ -44,26 +45,33 @@ diagnostic_fit <- function(fit, plot = TRUE, observed_y = NULL) {
   # Posterior predictive p-values
   if (!is.null(observed_y)) {
     log_S <- posterior::as_draws_matrix(fit$draws(c("log_S")))
-    expected_y <- matrix(data = NA, nrow = nrow(log_S), ncol = ncol(log_S))
-    for(i in 1:nrow(log_S)){
-      for (j in 1:ncol(log_S)) {
-        expected_y[i,j] <- rbinom(1, 1, exp(log_S[i,j]))
-      }
+    failed_y <- observed_y[delta == 1]
+    censored_y <- observed_y[delta == 0]
+
+    expected_y <- log_S[,delta==1]
+    expected_y <- failed_y/(-expected_y)
+
+    expected_censored <- log_S[,delta==0]
+    expected_censored <- censored_y/(-expected_censored)
+
+    for(i in 1:nrow(expected_censored)) {
+      expected_censored[i,] <- runif(length(censored_y), min = 0, max = min(max(observed_y),expected_censored[i,]))
     }
-    p_vals <- c()
 
-    for(i in 1:nrow(log_S)) {
-      p_vals <- c(p_vals, sum(expected_y[i,] <= observed_y)/length(observed_y))
-      }
+    p_failed <- colMeans(expected_y, na.rm = TRUE) < failed_y
+    p_censored <- colMeans(expected_censored, na.rm = TRUE) < censored_y
 
-
+    p_vals <- data.frame(
+      variable = c("Failed", "Censored"),
+      p_value = c(mean(p_failed, na.rm = TRUE), mean(p_censored, na.rm = TRUE))
+    )
     cat("\nPosterior predictive p-value summary:\n")
-    print(summary(p_vals))
+    print(p_vals)
 
     if (plot) {
-      hist(p_vals, breaks = 20, main = "Posterior Predictive p-values",
-           xlab = "p-value", col = "lightblue", border = "white", xlim = c(0, 1))
-      abline(v = c(0.1, 0.9), col = c("red"), lty = 2)
+
+      ppc_dens_overlay(y = failed_y, yrep = expected_y) + ggtitle("Posterior Predictive Check: Failure times")
+      ppc_dens_overlay(y = censored_y, yrep = expected_censored) + ggtitle("Posterior Predictive Check: Censored times")
     }
   } else {
     cat("\nNote: Observed y not available for posterior predictive checks.\n")
