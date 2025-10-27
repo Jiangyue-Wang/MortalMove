@@ -4,14 +4,16 @@
 \alias{diagnostic_fit}
 \title{Perform Diagnostics on CmdStan Fit}
 \usage{
-diagnostic_fit(fit, plot = TRUE, observed_y = NULL)
+diagnostic_fit(fit, plot = TRUE, observed_y = NULL, delta = NULL)
 }
 \arguments{
 \item{fit}{A CmdStanMCMC object returned from cmdstanr::sample()}
 
 \item{plot}{Logical; whether to show diagnostic plots}
 
-\item{observed_y}{Optional vector of observed values if predictive p-value is to be computed}
+\item{observed_y}{Optional vector of observed values if predictive p-value is to be computed, the survey/survival length of each individual}
+
+\item{delta}{Optional vector of censoring indicators (0 = censored, 1 = dead/failed) if predictive p-value is to be computed}
 }
 \value{
 Invisible list of diagnostics
