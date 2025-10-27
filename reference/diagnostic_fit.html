@@ -44,7 +44,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">diagnostic_fit</span><span class="op">(</span><span class="va">fit</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, observed_y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">diagnostic_fit</span><span class="op">(</span><span class="va">fit</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, observed_y <span class="op">=</span> <span class="cn">NULL</span>, delta <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -60,7 +60,11 @@
 
 
 <dt id="arg-observed-y">observed_y<a class="anchor" aria-label="anchor" href="#arg-observed-y"></a></dt>
-<dd><p>Optional vector of observed values if predictive p-value is to be computed</p></dd>
+<dd><p>Optional vector of observed values if predictive p-value is to be computed, the survey/survival length of each individual</p></dd>
+
+
+<dt id="arg-delta">delta<a class="anchor" aria-label="anchor" href="#arg-delta"></a></dt>
+<dd><p>Optional vector of censoring indicators (0 = censored, 1 = dead/failed) if predictive p-value is to be computed</p></dd>
 
 </dl></div>
     <div class="section level2">
