@@ -22,7 +22,7 @@ simulate_data <- function(n_animals = 200, n_fixes = 1000, n_dead = 40,
   # Create hunter density (centered peak) and prey availability (random)
   xx <- matrix(rep(grid_x, each = length(grid_y)), nrow = length(grid_y))
   yy <- matrix(rep(grid_y, times = length(grid_x)), nrow = length(grid_y))
-  hunter <- 10*exp(-((xx - 750)^2 + (yy - 750)^2) / 1000)
+  hunter <- 10*exp(-((xx - 750)^2 + (yy - 750)^2) / 10000)
   hunter[hunter<0.01] <- 0
   prey_avail <- matrix(rnorm(length(xx), mean = 500, sd = 50), nrow = nrow(xx))/100
 

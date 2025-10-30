@@ -46,7 +46,7 @@ fit <- mod$sample(
 ```
 
 ```{r, echo=FALSE}
-data(fit)
+# data(fit)
 ```
 
 # Check diagnostics
@@ -68,8 +68,8 @@ fit_spat <- mod$sample(
   data = sim,
   chains = 2,
   parallel_chains = 2,
-  iter_warmup = 50,
-  iter_sampling = 150,
+  iter_warmup = 500,
+  iter_sampling = 1500,
   seed = 123
 )
 ```
