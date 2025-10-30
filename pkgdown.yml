@@ -5,7 +5,7 @@ articles:
   fit-model-cmdstan: fit-model-cmdstan.html
   prepare-data-for-stan: prepare-data-for-stan.html
   simulating-data: simulating-data.html
-last_built: 2025-10-27T16:15Z
+last_built: 2025-10-30T19:17Z
 urls:
   reference: http://www.jiangyue-wang.github.io/MortalMove/reference
   article: http://www.jiangyue-wang.github.io/MortalMove/articles

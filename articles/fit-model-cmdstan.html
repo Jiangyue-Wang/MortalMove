@@ -129,30 +129,30 @@
 <span><span class="co">#&gt; - Online documentation and vignettes at mc-stan.org/loo</span></span>
 <span><span class="co">#&gt; - As of v2.0.0 loo defaults to 1 core but we recommend using as many as possible. Use the 'cores' argument or set options(mc.cores = NUM_CORES) for an entire session.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 5</span></span></span>
-<span><span class="co">#&gt;   variable    mean      sd      q5      q95</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> beta[1]   0.143  0.050<span style="text-decoration: underline;">8</span>   0.062<span style="text-decoration: underline;">4</span>  0.230  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> beta[2]  -<span style="color: #BB0000;">0.022</span><span style="color: #BB0000; text-decoration: underline;">8</span> 0.421   -<span style="color: #BB0000;">0.734</span>   0.651  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> alpha[1] -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">6</span> 0.003<span style="text-decoration: underline;">62</span> -<span style="color: #BB0000;">0.020</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.008</span><span style="color: #BB0000; text-decoration: underline;">65</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> alpha[2]  0.176  0.082<span style="text-decoration: underline;">8</span>   0.042<span style="text-decoration: underline;">4</span>  0.317  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> llambda  -<span style="color: #BB0000;">2.27</span>   1.61    -<span style="color: #BB0000;">4.92</span>    0.329  </span></span>
+<span><span class="co">#&gt;   variable   mean     sd      q5    q95</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> beta[1]   0.130 0.054<span style="text-decoration: underline;">8</span>  0.046<span style="text-decoration: underline;">8</span>  0.223</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> beta[2]  -<span style="color: #BB0000;">0.169</span> 0.422  -<span style="color: #BB0000;">0.882</span>   0.519</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> alpha[1] -<span style="color: #BB0000;">1.71</span>  0.348  -<span style="color: #BB0000;">2.26</span>   -<span style="color: #BB0000;">1.13</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> alpha[2]  0.354 0.088<span style="text-decoration: underline;">7</span>  0.208   0.496</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> llambda  -<span style="color: #BB0000;">0.195</span> 1.67   -<span style="color: #BB0000;">3.01</span>    2.49 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; --- Rhat and ESS Summary ---</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 4</span></span></span>
 <span><span class="co">#&gt;   variable  rhat ess_bulk ess_tail</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> beta[1]  1.00     <span style="text-decoration: underline;">2</span>065.    <span style="text-decoration: underline;">1</span>799.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> beta[2]  1.00     <span style="text-decoration: underline;">1</span>725.    <span style="text-decoration: underline;">1</span>577.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> alpha[1] 1.000    <span style="text-decoration: underline;">2</span>202.    <span style="text-decoration: underline;">1</span>880.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> alpha[2] 1.00     <span style="text-decoration: underline;">2</span>153.    <span style="text-decoration: underline;">1</span>706.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> llambda  1.00     <span style="text-decoration: underline;">2</span>160.    <span style="text-decoration: underline;">1</span>913.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> beta[1]   1.00    <span style="text-decoration: underline;">1</span>605.    <span style="text-decoration: underline;">1</span>934.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> beta[2]   1.00    <span style="text-decoration: underline;">2</span>407.    <span style="text-decoration: underline;">1</span>981.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> alpha[1]  1.00    <span style="text-decoration: underline;">1</span>558.    <span style="text-decoration: underline;">1</span>634.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> alpha[2]  1.00    <span style="text-decoration: underline;">2</span>055.    <span style="text-decoration: underline;">1</span>564.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> llambda   1.00    <span style="text-decoration: underline;">1</span>634.    <span style="text-decoration: underline;">1</span>593.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Computed from 3000 by 100 log-likelihood matrix.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;          Estimate   SE</span></span>
-<span><span class="co">#&gt; elpd_loo   -139.7 25.6</span></span>
-<span><span class="co">#&gt; p_loo         2.8  0.6</span></span>
-<span><span class="co">#&gt; looic       279.4 51.3</span></span>
+<span><span class="co">#&gt; elpd_loo   -132.9 25.1</span></span>
+<span><span class="co">#&gt; p_loo         2.3  0.5</span></span>
+<span><span class="co">#&gt; looic       265.7 50.1</span></span>
 <span><span class="co">#&gt; ------</span></span>
 <span><span class="co">#&gt; MCSE of elpd_loo is 0.0.</span></span>
 <span><span class="co">#&gt; MCSE and ESS estimates assume independent draws (r_eff=1).</span></span>
@@ -163,7 +163,7 @@
 <span><span class="co">#&gt; Posterior predictive p-value summary:</span></span>
 <span><span class="co">#&gt;   variable p_value</span></span>
 <span><span class="co">#&gt; 1   Failed  0.3000</span></span>
-<span><span class="co">#&gt; 2 Censored  0.7625</span></span>
+<span><span class="co">#&gt; 2 Censored  0.7125</span></span>
 <span><span class="fu">bayesplot</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html" class="external-link">mcmc_trace</a></span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llambda"</span>,<span class="st">"alpha"</span>,<span class="st">"beta"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fit-model-cmdstan_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
@@ -181,48 +181,48 @@
 <span>  data <span class="op">=</span> <span class="va">sim</span>,</span>
 <span>  chains <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  parallel_chains <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>  iter_warmup <span class="op">=</span> <span class="fl">50</span>,</span>
-<span>  iter_sampling <span class="op">=</span> <span class="fl">150</span>,</span>
+<span>  iter_warmup <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>  iter_sampling <span class="op">=</span> <span class="fl">1500</span>,</span>
 <span>  seed <span class="op">=</span> <span class="fl">123</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/diagnostic_fit.html">diagnostic_fit</a></span><span class="op">(</span><span class="va">fit_spat</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, observed_y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">sim</span><span class="op">$</span><span class="va">time_step</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, delta <span class="op">=</span> <span class="va">sim</span><span class="op">$</span><span class="va">delta</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 5</span></span></span>
-<span><span class="co">#&gt;   variable    mean      sd      q5     q95</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> beta[1]   0.139  0.056<span style="text-decoration: underline;">4</span>   0.053<span style="text-decoration: underline;">6</span>  0.243 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> beta[2]   0.036<span style="text-decoration: underline;">3</span> 0.424   -<span style="color: #BB0000;">0.608</span>   0.728 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> alpha[1] -<span style="color: #BB0000;">0.018</span><span style="color: #BB0000; text-decoration: underline;">5</span> 0.003<span style="text-decoration: underline;">33</span> -<span style="color: #BB0000;">0.023</span><span style="color: #BB0000; text-decoration: underline;">3</span> -<span style="color: #BB0000;">0.012</span><span style="color: #BB0000; text-decoration: underline;">6</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> alpha[2]  0.214  0.118    0.010<span style="text-decoration: underline;">0</span>  0.403 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> llambda  -<span style="color: #BB0000;">0.881</span>  1.22    -<span style="color: #BB0000;">3.18</span>    0.828 </span></span>
+<span><span class="co">#&gt;   variable    mean     sd       q5    q95</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> beta[1]   0.069<span style="text-decoration: underline;">7</span> 0.059<span style="text-decoration: underline;">3</span> -<span style="color: #BB0000;">0.025</span><span style="color: #BB0000; text-decoration: underline;">2</span>   0.171</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> beta[2]  -<span style="color: #BB0000;">0.316</span>  0.416  -<span style="color: #BB0000;">0.988</span>    0.355</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> alpha[1] -<span style="color: #BB0000;">1.46</span>   0.385  -<span style="color: #BB0000;">2.09</span>    -<span style="color: #BB0000;">0.828</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> alpha[2]  0.330  0.200  -<span style="color: #BB0000;">0.002</span><span style="color: #BB0000; text-decoration: underline;">11</span>  0.656</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> llambda  -<span style="color: #BB0000;">0.515</span>  1.72   -<span style="color: #BB0000;">3.39</span>     2.29 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; --- Rhat and ESS Summary ---</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 4</span></span></span>
 <span><span class="co">#&gt;   variable  rhat ess_bulk ess_tail</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> beta[1]   1.02   389.      138. </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> beta[2]   1.12    14.5      29.0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> alpha[1]  1.25     6.49     19.5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> alpha[2]  1.04    30.7      80.4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> llambda   1.75     3.33     15.0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> beta[1]  1.000    <span style="text-decoration: underline;">5</span>544.    <span style="text-decoration: underline;">2</span>325.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> beta[2]  1.00     <span style="text-decoration: underline;">6</span>495.    <span style="text-decoration: underline;">2</span>025.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> alpha[1] 1.00     <span style="text-decoration: underline;">3</span>214.    <span style="text-decoration: underline;">2</span>295.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> alpha[2] 1.000    <span style="text-decoration: underline;">4</span>593.    <span style="text-decoration: underline;">2</span>214.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> llambda  1.00     <span style="text-decoration: underline;">3</span>087.    <span style="text-decoration: underline;">2</span>266.</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Computed from 300 by 100 log-likelihood matrix.</span></span>
+<span><span class="co">#&gt; Computed from 3000 by 100 log-likelihood matrix.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;          Estimate   SE</span></span>
-<span><span class="co">#&gt; elpd_loo   -137.5 25.4</span></span>
-<span><span class="co">#&gt; p_loo         8.5  1.8</span></span>
-<span><span class="co">#&gt; looic       274.9 50.9</span></span>
+<span><span class="co">#&gt; elpd_loo   -125.2 24.3</span></span>
+<span><span class="co">#&gt; p_loo         6.7  1.7</span></span>
+<span><span class="co">#&gt; looic       250.5 48.6</span></span>
 <span><span class="co">#&gt; ------</span></span>
-<span><span class="co">#&gt; MCSE of elpd_loo is 0.2.</span></span>
+<span><span class="co">#&gt; MCSE of elpd_loo is 0.1.</span></span>
 <span><span class="co">#&gt; MCSE and ESS estimates assume independent draws (r_eff=1).</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; All Pareto k estimates are good (k &lt; 0.6).</span></span>
+<span><span class="co">#&gt; All Pareto k estimates are good (k &lt; 0.7).</span></span>
 <span><span class="co">#&gt; See help('pareto-k-diagnostic') for details.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Posterior predictive p-value summary:</span></span>
 <span><span class="co">#&gt;   variable p_value</span></span>
-<span><span class="co">#&gt; 1   Failed  0.3000</span></span>
-<span><span class="co">#&gt; 2 Censored  0.7625</span></span>
+<span><span class="co">#&gt; 1   Failed    0.40</span></span>
+<span><span class="co">#&gt; 2 Censored    0.65</span></span>
 <span><span class="fu">bayesplot</span><span class="fu">::</span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html" class="external-link">mcmc_trace</a></span><span class="op">(</span><span class="va">fit_spat</span><span class="op">$</span><span class="fu">draws</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llambda"</span>,<span class="st">"alpha"</span>,<span class="st">"beta"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fit-model-cmdstan_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>

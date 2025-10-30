@@ -105,13 +105,13 @@ presence of that season. All values should be numeric.</li>
 hunter density (<code>hunter</code>) as habitat covariates.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;           x         y animal_id timestamp prey_avail       hunter</span></span>
-<span><span class="co">#&gt; 1 992.94402 583.03060         1         1   448.6998 1.930454e-03</span></span>
-<span><span class="co">#&gt; 2 253.09899 165.02589         1         2   585.7532 2.273980e-18</span></span>
-<span><span class="co">#&gt; 3  49.53844  96.30111         1         3   471.9762 3.723363e-25</span></span>
-<span><span class="co">#&gt; 4 686.32495 428.61309         1         4   401.6691 4.393693e-02</span></span>
-<span><span class="co">#&gt; 5 786.92735 355.76157         1         5   524.8925 3.726653e-06</span></span>
-<span><span class="co">#&gt; 6 353.60608 844.93354         1         6   477.7169 1.637377e-07</span></span></code></pre></div>
+<span><span class="co">#&gt;           x        y animal_id timestamp prey_avail   hunter</span></span>
+<span><span class="co">#&gt; 1 495.44004 320.3625         1         1   5.179907 5.976312</span></span>
+<span><span class="co">#&gt; 2  85.06545 219.6892         1         2   4.884911 4.535864</span></span>
+<span><span class="co">#&gt; 3 329.58052 333.4154         1         3   5.230458 5.291962</span></span>
+<span><span class="co">#&gt; 4 215.87068 260.6982         1         4   5.230458 5.291962</span></span>
+<span><span class="co">#&gt; 5 109.47462 271.1017         1         5   4.884911 4.535864</span></span>
+<span><span class="co">#&gt; 6 157.70392 252.8365         1         6   4.884911 4.535864</span></span></code></pre></div>
 <p>The second one should have the following columns: -
 <code>animal_id</code>: unique identifier for each individual -
 <code>fate</code>: fate of the individual (e.g., 0 for alive, 1 for
@@ -142,20 +142,13 @@ function does this for you. Further, we need to change column name
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>delta <span class="op">=</span> <span class="va">fate</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;           x         y animal_id timestamp prey_avail       hunter age sex_m</span></span>
-<span><span class="co">#&gt; 1 992.94402 583.03060         1         1   448.6998 1.930454e-03  16     0</span></span>
-<span><span class="co">#&gt; 2 253.09899 165.02589         1         2   585.7532 2.273980e-18  16     0</span></span>
-<span><span class="co">#&gt; 3  49.53844  96.30111         1         3   471.9762 3.723363e-25  16     0</span></span>
-<span><span class="co">#&gt; 4 686.32495 428.61309         1         4   401.6691 4.393693e-02  16     0</span></span>
-<span><span class="co">#&gt; 5 786.92735 355.76157         1         5   524.8925 3.726653e-06  16     0</span></span>
-<span><span class="co">#&gt; 6 353.60608 844.93354         1         6   477.7169 1.637377e-07  16     0</span></span>
-<span><span class="co">#&gt;   delta</span></span>
-<span><span class="co">#&gt; 1     0</span></span>
-<span><span class="co">#&gt; 2     0</span></span>
-<span><span class="co">#&gt; 3     0</span></span>
-<span><span class="co">#&gt; 4     0</span></span>
-<span><span class="co">#&gt; 5     0</span></span>
-<span><span class="co">#&gt; 6     0</span></span></code></pre></div>
+<span><span class="co">#&gt;           x        y animal_id timestamp prey_avail   hunter age sex_m delta</span></span>
+<span><span class="co">#&gt; 1 495.44004 320.3625         1         1   5.179907 5.976312  16     0     0</span></span>
+<span><span class="co">#&gt; 2  85.06545 219.6892         1         2   4.884911 4.535864  16     0     0</span></span>
+<span><span class="co">#&gt; 3 329.58052 333.4154         1         3   5.230458 5.291962  16     0     0</span></span>
+<span><span class="co">#&gt; 4 215.87068 260.6982         1         4   5.230458 5.291962  16     0     0</span></span>
+<span><span class="co">#&gt; 5 109.47462 271.1017         1         5   4.884911 4.535864  16     0     0</span></span>
+<span><span class="co">#&gt; 6 157.70392 252.8365         1         6   4.884911 4.535864  16     0     0</span></span></code></pre></div>
 <p>Next, we prepare the data for modeling. The
 <code>prepare_data_for_stan()</code> function does this for you. You can
 specify which habitat covariates and individual covariates you want to
