@@ -12,7 +12,9 @@ prepare_stan_data(
   ind_cov_names = c("age", "sex_m"),
   include_cell_effect = TRUE,
   grid_bounds = NULL,
-  grid_res = NULL
+  grid_res = NULL,
+  cause_col = "delta",
+  n_causes = NULL
 )
 }
 \arguments{
@@ -31,6 +33,10 @@ prepare_stan_data(
 \item{grid_bounds}{Named list with xmin, xmax, ymin, ymax (only required if include_cell_effect = TRUE)}
 
 \item{grid_res}{Grid resolution in meters (required if include_cell_effect = TRUE), please make sure that the grid bounds are divisible by the grid resolution}
+
+\item{cause_col}{Character; name of the column in df that contains cause of death information}
+
+\item{n_causes}{Integer; number of unique causes of death (if applicable)}
 }
 \value{
 A named list ready to be passed to a CmdStan model

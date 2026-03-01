@@ -8,6 +8,8 @@
 #' @param include_cell_effect Logical; whether to include spatial cell effect
 #' @param grid_bounds Named list with xmin, xmax, ymin, ymax (only required if include_cell_effect = TRUE)
 #' @param grid_res Grid resolution in meters (required if include_cell_effect = TRUE), please make sure that the grid bounds are divisible by the grid resolution
+#' @param cause_col Character; name of the column in df that contains cause of death information
+#' @param n_causes Integer; number of unique causes of death (if applicable)
 #' @return A named list ready to be passed to a CmdStan model
 #' @export
 prepare_stan_data <- function(df, include_hab_cov = TRUE, include_ind_cov = TRUE,
@@ -15,7 +17,9 @@ prepare_stan_data <- function(df, include_hab_cov = TRUE, include_ind_cov = TRUE
                               ind_cov_names = c("age", "sex_m"),
                               include_cell_effect = TRUE,
                               grid_bounds = NULL,
-                              grid_res = NULL) {
+                              grid_res = NULL,
+                              cause_col = "delta",
+                              n_causes = NULL) {
   library(dplyr)
   library(FNN)
   library(lubridate)
@@ -45,7 +49,31 @@ prepare_stan_data <- function(df, include_hab_cov = TRUE, include_ind_cov = TRUE
   time_step[is.na(time_step)] <- 0 # Replace NAs with 0
 
   n_locs <- df %>% count(animal_id) %>% pull(n)
-  delta <- tapply(df$delta, df$animal_id, mean)
+
+  # Competing risks: build n x K one-hot delta matrix
+  if (is.null(n_causes)) {
+    n_causes <- max(df[[cause_col]], na.rm = TRUE)
+  }
+
+  # one row per animal (keeps consistent ordering)
+  animal_index <- df %>%
+    distinct(animal_id) %>%
+    arrange(animal_id) %>%
+    mutate(a = row_number())
+
+  # collapse to one cause per animal
+  event_data <- df %>%
+    group_by(animal_id) %>%
+    summarise(cause = max(.data[[cause_col]], na.rm = TRUE), .groups = "drop") %>%
+    right_join(animal_index, by = "animal_id") %>%
+    arrange(a)
+
+  cause <- event_data$cause
+  cause[is.na(cause)] <- 0
+
+  delta <- matrix(0, nrow = n_animals, ncol = n_causes)
+  idx <- which(cause > 0)
+  delta[cbind(idx, cause[idx])] <- 1
 
   # Cell effect
   if (include_cell_effect) {
@@ -87,6 +115,7 @@ prepare_stan_data <- function(df, include_hab_cov = TRUE, include_ind_cov = TRUE
 
   list(
     n = n_animals,
+    n_causes = n_causes,
     max_locs = n_fixes,
     n_locs = n_locs,
     time_step = time_step,
