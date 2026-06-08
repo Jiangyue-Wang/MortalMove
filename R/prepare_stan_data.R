@@ -54,9 +54,9 @@ prepare_stan_data <- function(df, include_hab_cov = TRUE, include_ind_cov = TRUE
   df$dt[is.na(df$dt)] <- median_dt
 
   # Identify and truncate large time gaps
-  large_gap <- !is.na(df$dt_raw) & df$dt_raw > max_time_gap
+  large_gap <- !is.na(df$dt) & df$dt > max_time_gap
   n_large_gaps <- sum(large_gap)
-  df$dt <- pmin(df$dt_raw, max_time_gap)
+  df$dt <- pmin(df$dt, max_time_gap)
 
   if (n_large_gaps > 0) {
     warning(
