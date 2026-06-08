@@ -10,6 +10,7 @@
 #' @param grid_res Grid resolution in meters (required if include_cell_effect = TRUE), please make sure that the grid bounds are divisible by the grid resolution
 #' @param cause_col Character; name of the column in df that contains cause of death information
 #' @param n_causes Integer; number of unique causes of death (if applicable)
+#' @param max_time_gap Numeric; maximum time interval, in hours, allowed between consecutive GPS fixes. Intervals larger than this value are truncated to this value. The default is Inf, meaning that intervals are not truncated.
 #' @return A named list ready to be passed to a CmdStan model
 #' @export
 prepare_stan_data <- function(df, include_hab_cov = TRUE, include_ind_cov = TRUE,
@@ -19,7 +20,7 @@ prepare_stan_data <- function(df, include_hab_cov = TRUE, include_ind_cov = TRUE
                               grid_bounds = NULL,
                               grid_res = NULL,
                               cause_col = "delta",
-                              n_causes = NULL) {
+                              n_causes = NULL, max_time_gap = Inf) {
   library(dplyr)
   library(FNN)
   library(lubridate)
@@ -28,7 +29,17 @@ prepare_stan_data <- function(df, include_hab_cov = TRUE, include_ind_cov = TRUE
   n_animals <- length(unique(df$animal_id))
   n_fixes <- df %>% count(animal_id) %>% pull(n) %>% max()
 
-  # Fill in missing locations (assumes complete tracks or user has preprocessed)
+  # Check maximum time-gap argument
+  if (
+    !is.numeric(max_time_gap) ||
+    length(max_time_gap) != 1L ||
+    is.na(max_time_gap) ||
+    max_time_gap <= 0
+  ) {
+    stop("`max_time_gap` must be one positive numeric value.")
+  }
+
+  # Sort locations chronologically and assign fix_id
   df <- df %>% arrange(animal_id, timestamp)
   df$fix_id <- ave(df$animal_id, df$animal_id, FUN = seq_along)
 
@@ -42,6 +53,23 @@ prepare_stan_data <- function(df, include_hab_cov = TRUE, include_ind_cov = TRUE
   median_dt <- median(df$dt, na.rm = TRUE)
   df$dt[is.na(df$dt)] <- median_dt
 
+  # Identify and truncate large time gaps
+  large_gap <- !is.na(df$dt_raw) & df$dt_raw > max_time_gap
+  n_large_gaps <- sum(large_gap)
+  df$dt <- pmin(df$dt_raw, max_time_gap)
+
+  if (n_large_gaps > 0) {
+    warning(
+      sprintf(
+        "%s time interval%s exceeded max_time_gap = %s hours and %s truncated.",
+        n_large_gaps,
+        ifelse(n_large_gaps == 1, "", "s"),
+        max_time_gap,
+        ifelse(n_large_gaps == 1, "was", "were")
+      ),
+      call. = FALSE
+    )
+  }
   # Reshape to time_step matrix
   time_step_df <- df[, c("animal_id", "fix_id", "dt")] %>% pivot_wider(
     names_from = fix_id, values_from = dt)

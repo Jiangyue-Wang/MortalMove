@@ -14,7 +14,8 @@ prepare_stan_data(
   grid_bounds = NULL,
   grid_res = NULL,
   cause_col = "delta",
-  n_causes = NULL
+  n_causes = NULL,
+  max_time_gap = Inf
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ prepare_stan_data(
 \item{cause_col}{Character; name of the column in df that contains cause of death information}
 
 \item{n_causes}{Integer; number of unique causes of death (if applicable)}
+
+\item{max_time_gap}{Numeric; maximum time interval, in hours, allowed between consecutive GPS fixes. Intervals larger than this value are truncated to this value. The default is Inf, meaning that intervals are not truncated.}
 }
 \value{
 A named list ready to be passed to a CmdStan model
